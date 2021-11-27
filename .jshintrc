@@ -1,0 +1,8 @@
+{
+    "esversion": 6,
+
+      // Disable "Misleading line break before ...":
+    "-W014": false,
+    "-W093": false
+
+}
