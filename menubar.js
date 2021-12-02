@@ -83,7 +83,7 @@ function MENUBAR_html() {
 				</tr>
 				<tr>
 					<td class="paramlabel">Repulsion Strength:</td>
-					<td class="param"><input type="number" id="settings_repulsion_strength" min="0" step="1" value="2000" class="paramspinbox"></td>
+					<td class="param"><input type="number" id="settings_repulsion_strength" min="0" step="20" value="2000" class="paramspinbox"></td>
 				</tr>
 				<tr>
 					<td class="paramlabel">Link Strength:</td>

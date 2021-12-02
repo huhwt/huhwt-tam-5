@@ -109,6 +109,7 @@ function loadGedcom(url, callback)
                     current_fam = {
                         husband : null,
                         wife : null,
+                        mdate : null,
                         children : []
                     };
                     gedcom.families.set(id, current_fam);
@@ -232,6 +233,7 @@ function loadGedcom(url, callback)
                     // set date to event
                     if (current_parentType == "BIRT") current_pers.bdate = date;
                     else if (current_parentType == "DEAT") current_pers.ddate = date;
+                    else if (current_parentType == "MARR") current_fam.mdate = date;
                 }
             }
         }

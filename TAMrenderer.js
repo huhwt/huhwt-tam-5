@@ -60,7 +60,6 @@ var PARAM_ARROW_DISTANCE_FACTOR = 1.0;
 var PARAM_INTERPOLATE_NN = false;
 var PARAM_INDICATOR_EPSILON = 0.1;
 
-    
 // Contour Map Appearance 
 var PARAM_CONTOUR_WIDTH = 0.5;    // pixel width of small contours
 var PARAM_RANGE_MIN = 0;          // minimum value
@@ -70,16 +69,14 @@ var PARAM_CONTOUR_STEP = 10;      // value range between contours
 var PARAM_CONTOUR_BIG_STEP = 50;  // value range between thick contours
 var PARAM_INDICATOR_FONTSIZE = 15;
 var PARAM_MANY_SEEDS = true;
-    
 
 // Interactions
 var PARAM_SHOW_TOOLTIPS = true;
 var PARAM_TOOLTIP_DRAG_OPACITY = 0.5;
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function setRange(nodes)
+function setRange(nodes, CurrentYear)
 {
     PARAM_RANGE_MIN = 1e8;
     PARAM_RANGE_MAX = -1e8;
@@ -87,12 +84,28 @@ function setRange(nodes)
     nodes.forEach(node => 
     {
         // automatically adjust TAM height range to min and max values
-        if (node.value != null)
+        if (node.value)
         {
-            PARAM_RANGE_MIN = Math.min(PARAM_RANGE_MIN, node.value);
-            PARAM_RANGE_MAX = Math.max(PARAM_RANGE_MAX, node.value);
+            _nvalue = node.value;
+            if ( _nvalue < 1500 ) {
+                _nvalue = 1500;
+            } else {
+                if ( _nvalue > CurrentYear ) {
+                _nvalue = CurrentYear;
+                }
+            }
+            PARAM_RANGE_MIN = Math.min(PARAM_RANGE_MIN, _nvalue);
+            PARAM_RANGE_MAX = Math.max(PARAM_RANGE_MAX, _nvalue);
             if ( node.valueD ) {
-                PARAM_RANGE_MAX = Math.max(PARAM_RANGE_MAX, node.valueD);
+                _nvalue = node.valueD;
+                if ( _nvalue < 1500 ) {
+                    _nvalue = 1500;
+                } else {
+                    if ( _nvalue > CurrentYear ) {
+                    _nvalue = CurrentYear;
+                    }
+                }
+                    PARAM_RANGE_MAX = Math.max(PARAM_RANGE_MAX, _nvalue);
             }
         }
     });
@@ -101,6 +114,8 @@ function setRange(nodes)
     range = PARAM_RANGE_MAX - PARAM_RANGE_MIN;
     PARAM_RANGE_MIN = Math.floor(PARAM_RANGE_MIN - range / 7);
     PARAM_RANGE_MIN -= (PARAM_RANGE_MIN % 10);
+    PARAM_RANGE_MAX -= (PARAM_RANGE_MAX % 10);
+    PARAM_RANGE_MAX += 10;
     // PARAM_RANGE_MAX = Math.ceil(PARAM_RANGE_MAX + range / 11);
 }
 
@@ -115,6 +130,7 @@ class TAMRenderer
         this.TOPO_LAYER = null;
         this.SHADING_LAYER = null;
         this.GRAPH_LAYER = null;
+        this.BULLS_EYE = null;
 
         // SVG Elements
         this.SVG_NODE_CIRCLES = null;
@@ -138,6 +154,9 @@ class TAMRenderer
         this.FORCE_SIMULATION = null;
         this.REPULSION_FORCE = null;
         this.LINK_FORCE = null;
+
+        this.CurrentYear = new Date().getFullYear();
+
     }
 
     createForceGraphJSON(json)
@@ -167,7 +186,7 @@ class TAMRenderer
             this.NODES.push(node);
         });
         
-        setRange(this.NODES);
+        setRange(this.NODES, this.CurrentYear);
         
 
         // list dependencies
@@ -264,6 +283,7 @@ class TAMRenderer
         this.TOPO_LAYER = this.CANVAS.append("g").attr("id", "topolayer");
         this.SHADING_LAYER = this.CANVAS.append("g").attr("id", "shadinglayer");
         this.GRAPH_LAYER = this.CANVAS.append("g").attr("id", "graphlayer");
+        this.BULLS_EYE = d3.select("#bullseye").append("g");
     }
 
 

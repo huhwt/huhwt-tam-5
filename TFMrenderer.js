@@ -27,14 +27,15 @@ class TFMRenderer extends TAMRenderer
     constructor() 
     {
         super();
-        
+
         this.PNODES = [];
         this.FNODES = [];
         this.LINKNODES = [];
         this.FAMILYLINKS = [];
-        
+
         this.SVG_FAMILY_CIRCLES = null;
         this.SVG_FAMILY_LABELS = null;
+
     }
 
     createFamilyForceGraph(graph, nodePositions = null)
@@ -48,6 +49,10 @@ class TFMRenderer extends TAMRenderer
             p.r = PARAM_NODE_RADIUS;
             p.cr = p.sex == FEMALE ? PARAM_NODE_RADIUS : 0;
             p.value = p.bdate ? p.bdate.getFullYear() : null;
+            if ( p.value && p.value > this.CurrentYear) {
+                p.value = this.CurrentYear;
+            }
+
             p.valueD = p.ddate ? p.ddate.getFullYear() : null;
 
             // set node positions (if available)
@@ -67,7 +72,7 @@ class TFMRenderer extends TAMRenderer
             this.PNODES.push(p);
         });
 
-        setRange(this.PNODES);
+        setRange(this.PNODES, this.CurrentYear);
         
         
         // list families
@@ -508,10 +513,12 @@ class TFMRenderer extends TAMRenderer
         {
             const wife = node.wife;
             const husband = node.husband;
+            const mdate = node.mdate;
 
             return node.familyname + (node.id ? " (" + node.id + ")" : "")
                     + "\n\n" + i18n("wife") + (wife ? wife.getFullName() + " (" + wife.id + ")" : _unknown)
                     + "\n" + i18n("husband") + (husband ? husband.getFullName() + " (" + husband.id + ")" : _unknown)
+                    + "\n" + i18n("marriage") + (mdate ? node.mdate.toLocaleDateString() : _unknown)
                     + "\n" + i18n("children") + (node.children ? node.children.length : _unknown)
                     + "\n" + i18n("Fchild") + (node.value ? node.value : _unknown)
                     ;

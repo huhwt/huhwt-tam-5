@@ -652,7 +652,7 @@ class TopoMap extends Field
                 }
             }
 
-            // push current inmage onto pyramid
+            // push current image onto pyramid
             pyramid.push([currentField, currentFlags]);
             currentField = coarseField;
             currentFlags = coarseFlags;
