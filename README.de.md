@@ -1,11 +1,22 @@
 # Topographic Attributes Maps - erweitert
 
+![webtrees major version](https://img.shields.io/badge/webtrees-v2.0.x-green)
+![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
+
 Diese Version setzt auf der 'Demo Implementation for Publication' auf, wie sie
 per dem 11. Mai 2021 auf https://github.com/rpreiner/tam veröffentlicht war.
 
 Die Kern-Funktionen sind unverändert wie beschrieben in README_TAM.md.
 
-## Anmerkung
+Aufruf: Lokal im Browser - Doppel-Klick auf 'index.htm'.
+
+Getestet mit 'Firefox','Chrome','Edge','Brave' - jeweils aktuelle Version per 01.12.2021.
+
+GEDCOM wurde erzeugt aus webtrees-v2.0.
+
+Die Darstellung operiert auf Basis D3.js - Version 5, dynamisch referenziert.
+
+### Anmerkung
 
 Die 'Topographic Attribute Map' wird nur dann generiert, wenn man die Darstellung
 einfriert, also den 'F'-Schalter aktiviert.
@@ -17,19 +28,24 @@ bekannte INDI führen ohne einschlägige Meldung zu Fehlern, die ein Einfrieren
 oder sogar den Absturz bewirken können, in jedem Fall werden solche Links nicht
 gebildet und die Darstellung hat nicht weiter erläuterte Lücken.
 
-# Erweiterungen
+## Erweiterungen
 
-## i18n
+### i18n
 
-Alle Beschriftungen und Meldungen sind im Original hart codiert. Diese
-wurden so umgestellt, dass jetzt Calls auf i18n.js erfolgen, übernommen 
-von https://github.com/roddeh/i18njs und statisch eingebunden.
+In der ursprünglichen Version sind alle Bezeichnungen und Meldungen hart kodiert. Das
+wurde geändert, es erfolgen jetzt Aufrufe an i18n.js, aus https://github.com/roddeh/i18njs
+übernommen wurde und statisch eingebunden.
 
-Die zugehörigen Texte stehen in translation.js.
+Die zugehörigen Texte stehen in 'translations.js'.
 
-## Konturen-Tooltip
+### Konturen-Tooltip
 
 Man kann jetzt den Jahreswert einer Konturenlinie als Tooltip einblenden,
 welcher der Cursorposition folgt.
 
 Diese Funktion kann separat an- und abgestellt werden.
+
+### family-Tooltip mit MARR-Tag
+
+Im family-Tooltip wird jetzt auch das Hochzeits-Datum, abgeleitet aus dem MARR-Tag,
+angezeigt.
