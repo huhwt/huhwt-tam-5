@@ -12,15 +12,15 @@ Call: Local in browser - double-click on 'index.htm'.
 
 Tested with 'Firefox', 'Chrome', 'Edge', 'Brave' - each current version as of 01.12.2021.
 
-GEDCOM was generated from webtrees-v2.0.
+GEDCOM works as specified in GEDOM-5.5.1-specification.
 
 The presentation operates on the basis of D3.js - version 5, dynamically referenced.
 
 ### Notes
 
-The 'Topographic Attribute Map' is only generated if you freeze the display. freeze the display, i.e. activate the 'F'-button.
+The 'Topographic Attribute Map' is only generated if you freeze the display, i.e. activate the 'F'-button.
 
-If you want to import GEDCOM, you have to make sure that INDI and FAM sections are cleanly separated. are cleanly separated from each other. The corresponding NODE and LINK structures are created during the import process, references in FAM to INDIs that are not yet known INDI will lead to errors, which can cause a freeze or even a crash. freeze or even crash, in any case such links will not be formed and the formed and the representation has gaps not explained further.
+If you want to import GEDCOM, you have to make sure that INDI and FAM sections are cleanly separated from each other (INDI first). The corresponding NODE and LINK structures are created during the import process, references in FAM to INDIs that are not yet known will lead to errors, which can cause a freeze or even a crash. In any case such links will not be formed and the representation has gaps not explained further.
 
 ## Extensions
 

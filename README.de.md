@@ -12,7 +12,7 @@ Aufruf: Lokal im Browser - Doppel-Klick auf 'index.htm'.
 
 Getestet mit 'Firefox','Chrome','Edge','Brave' - jeweils aktuelle Version per 01.12.2021.
 
-GEDCOM wurde erzeugt aus webtrees-v2.0.
+GEDCOM wird entsprechend der Spezifikation GEDOM-5.5.1 interpretiert.
 
 Die Darstellung operiert auf Basis D3.js - Version 5, dynamisch referenziert.
 
@@ -49,3 +49,10 @@ Diese Funktion kann separat an- und abgestellt werden.
 
 Im family-Tooltip wird jetzt auch das Hochzeits-Datum, abgeleitet aus dem MARR-Tag,
 angezeigt.
+
+### Fixierte Knoten hervorgehoben
+
+Personen- wie auch Familien-Knoten können wie im Original durch Drag-and-Drop verschoben und
+damit auch fixiert werden. Alternativ kann man Knoten auch durch Doppel-Klick fixieren.
+Fixierte Knoten werden jetzt farbig hervorgehoben. Klick auf den fixierten Knoten hebt die
+Fixierung wieder auf.
